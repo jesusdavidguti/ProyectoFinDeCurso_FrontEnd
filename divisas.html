@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Proyecto fin de curso DAW">
+        <meta name="author" content="Jesús David Gutiérrez Delgado">
+        <title>Gestión de divisas</title>
+    
+        <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
+    
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="dist/bootstrap/css/bootstrap.min.css">
+        <link href="fontawesome-free-5.15.2-web/css/all.css" rel="stylesheet">     
+    
+        <style>
+          .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+          }
+    
+          @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+              font-size: 3.5rem;
+            }
+          }
+        </style>    
+        <!-- Custom styles for this template -->
+        <!-- <link href="dashboard.css" rel="stylesheet"> -->
+      </head>
+<body>
+    
+    <!--REGISTRO DE DIVISA-->
+    <div class="plan">
+      <h3>Divisa</h3>
+      <br />
+      <form id="formulario" method="post" class="needs-validation" novalidate>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+              <label for="inputCodDivisa">Nombre</label>
+              <input type="text" class="form-control" id="inputCodDivisa" required>
+              <div class="valid-feedback">OK!</div>
+              <div class="invalid-feedback">Por favor, rellene este campo</div>
+          </div>
+        </div>
+
+        <div class="form row">
+            <div class="form-group col-md-6">
+              <label for="inputCodPais">Código de país</label>
+              <input type="text" class="form-control" id="inputCodPais" required>                                                                                  
+              <div class="valid-feedback">OK!</div>
+              <div class="invalid-feedback">Por favor, rellene este campo</div>   
+            </div>
+        </div>
+
+        <div class="form row">
+          <div class="form-group col-md-6">
+            <label for="InputCambio">Cambio $US</label>
+            <input type="decimal" min="0.01" max="4.99" class="form-control" id="InputCambio" required> 
+            <div class="valid-feedback">OK!</div>
+            <div class="invalid-feedback">Por favor, rellene este campo</div>   
+          </div>             
+        </div>      
+
+        <button id="guardar" class="btn btn-primary" type="submit">Guardar</button>
+        <button id="consultar" class="btn btn-primary" type="submit">Consultar</button>
+
+      </form>
+    </div>    
+
+      <!--FOOTER-->
+    
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+      <p class="mb-1">&copy; 2021 AppValores</p>
+      <ul class="list-inline">
+        <li class="list-inline-item"><a href="https://www.bolsamadrid.es/">Bolsa de Madrid</a></li>
+        <li class="list-inline-item"><a href="https://www.bde.es/">Banco de España</a></li>
+        <li class="list-inline-item"><a href="https://www.aepd.es/es">Protección Datos</a></li>
+      </ul>
+
+      <ul class="list-inline">
+          <li class="list-inline-item"><a href="https://twitter.com/Travelodge_ES/"><i class="fab fa-twitter-square"></i></a></i></li>
+          <li class="list-inline-item"><a href="https://www.instagram.com/explore/tags/travellog/?hl=es"><i class="fab fa-instagram-square"></i></a></i></li>
+          <li class="list-inline-item"><a href="https://www.youtube.com/channel/UCTgb_bYrvcQ7JcnjOfLOeAw"><i class="fab fa-youtube"></i></a></i></li>
+          <li class="list-inline-item"><a href="https://www.facebook.com/travelogcom/"><i class="fab fa-facebook-square"></i></a></i></li>
+      </ul>
+    </footer>
+  
+    <!--SCRIPTS-->
+      <script src="Bootstrap/jquery/jquery-3.5.1.min.js"></script>
+      <script src="Bootstrap/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <script src="js/funciones.js"></script>
+</body>
+</html>

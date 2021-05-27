@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Proyecto fin de curso DAW">
+    <meta name="author" content="Jesús David Gutiérrez Delgado">
+    <title>Gestión de bolsa</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
+
+    <!-- Bootstrap core CSS -->
+    <!-- <link rel="stylesheet" href="dist/bootstrap/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="fontawesome-free-5.15.2-web/css/all.css" rel="stylesheet">     
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet"/> 
+
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }      
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>    
+    <!-- Custom styles for this template -->
+    <!-- <link href="dashboard.css" rel="stylesheet"> -->
+  </head>
+  <body>
+    
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Gestión de inversiones</a>
+</header>
+
+<div class="container-fluid">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <div class="position-sticky pt-3">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">
+              <span data-feather="home"></span>
+              Inicio
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#divisas">
+              <span data-feather="dollar-sign"></span>
+              Divisas
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#valores">
+              <span data-feather="activity"></span>
+              Evolución valores
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#compraValores">
+              <span data-feather="shopping-cart"></span>
+              Compra valores
+            </a>
+          </li>          
+        </ul>
+        
+
+      </div>
+    </nav>
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 id="divisas" class="h2">Divisas</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+        </div>
+      </div>
+
+      <canvas class="my-4 w-100" id="divisasChart" width="900" height="380"></canvas>
+
+      <h2 id= "tablaResumen">Resumen valores</h2>
+      <table id= "tablaValores" class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Valor</th>            
+            <th scope="col">Cotización</th>
+            <th scope="col">Subida</th>
+            <th scope="col">Valor</th>                        
+            <th scope="col">Cotización</th>
+            <th scope="col">Bajada</th>                        
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td></td>            
+            <td></td>
+            <td></td>
+            <td></td>            
+            <td></td>
+            <td></td>            
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td></td>            
+            <td></td>
+            <td></td>
+            <td></td>            
+            <td></td>
+            <td></td>            
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td></td>            
+            <td></td>
+            <td></td>
+            <td></td>            
+            <td></td>
+            <td></td>            
+          </tr>
+          <tr>
+            <th scope="row">4</th>
+            <td></td>            
+            <td></td>
+            <td></td>
+            <td></td>            
+            <td></td>
+            <td></td>            
+          </tr>
+          <tr>
+            <th scope="row">5</th>
+            <td></td>            
+            <td></td>
+            <td></td>
+            <td></td>            
+            <td></td>
+            <td></td>            
+          </tr>          
+        </tbody>
+      </table>
+      
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 id="valores" class="h2">Evolución de valores</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          
+          <select id="selectValorUno" onchange="cambiaSelect()" class="form-select" aria-label="Default select example">
+            <option selected>Seleccione valor</option>
+          </select>        
+
+          <select id="selectValorDos" onchange="cambiaSelect()" class="form-select" aria-label="Default select example">
+            <option selected>Seleccione valor</option>
+          </select>                  
+
+          <select id="selectPeriodicidad" onchange="cambiaPeriodicidad()" class="form-select" aria-label="Default select example">
+            <option selected>Seleccione periodicidad</option>
+            <option value="1">1 día</option>            
+            <option value="2">5 días</option>
+            <option value="3">1 semana</option>            
+            <option value="4">1 mes</option>
+            <option value="5">6 meses</option>            
+            <option value="6">1 año</option>
+          </select>
+
+        </div>
+      </div>
+
+      <canvas class="my-4 w-100" id="valoresChart" width="900" height="380"></canvas>
+
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 id="compraValores" class="h2">Compra de valores</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          
+          <button type="button" class="btn btn-warning" id="btnComprar"
+            onclick="resetCompra()">Reset
+          </button>
+          <button type="button" class="btn btn-success" id="btnComprar"
+          onclick="compraValor()">Comprar
+          </button> 
+                              
+          <select id="selectValorCompra" class="form-select" aria-label="Default select example">
+            <option selected>Seleccione valor</option>
+          </select>                            
+          <label for="cantidaValores"></label>
+          <input id="cantidaValores" type="number" min="1"></input>
+           
+          <label for="importe"></label>
+          <input id="importe" type="string" disabled></input>
+        </div>
+      </div>
+
+      <canvas class="my-4 w-100" id="compraValoresChart" width="900" height="380"></canvas>
+
+    </main>
+  </div>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.0/chart.min.js"></script>    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>    
+    
+    <script src="js/objetos.js"></script>      
+    <script src="js/dashboard.js"></script>
+
+  </body>
+</html>
