@@ -81,9 +81,17 @@ function compraValor(){
       
       importe = cantidad * jsonValor.cotizacionUSdolar
 
-      arrayCompras.push(importe); 
-      arrayLabelCompras.push(jsonValor.valorHistID.valor.nombre);
-      arrayColor.push(colorDivisa(jsonValor.valorHistID.valor.divisa.codDivisa));
+      // Ya se ha añadido
+      if (arrayLabelCompras.indexOf(jsonValor.valorHistID.valor.nombre) != -1){
+          pos = arrayLabelCompras.indexOf(jsonValor.valorHistID.valor.nombre);
+          importe = importe + arrayCompras[pos];
+          arrayCompras.splice(pos,1,importe);
+      }
+      else{
+        arrayCompras.push(importe); 
+        arrayLabelCompras.push(jsonValor.valorHistID.valor.nombre);
+        arrayColor.push(colorDivisa(jsonValor.valorHistID.valor.divisa.codDivisa));  
+      }
 
       addDatosCompras(arrayColor, arrayLabelCompras, arrayCompras);
 
