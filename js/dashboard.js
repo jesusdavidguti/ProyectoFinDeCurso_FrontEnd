@@ -88,9 +88,9 @@ function compraValor(){
           arrayCompras.splice(pos,1,importe);
       }
       else{
-        arrayCompras.push(importe); 
-        arrayLabelCompras.push(jsonValor.valorHistID.valor.nombre);
-        arrayColor.push(colorDivisa(jsonValor.valorHistID.valor.divisa.codDivisa));  
+          arrayCompras.push(importe); 
+          arrayLabelCompras.push(jsonValor.valorHistID.valor.nombre);
+          arrayColor.push(colorDivisa(jsonValor.valorHistID.valor.divisa.codDivisa));  
       }
 
       addDatosCompras(arrayColor, arrayLabelCompras, arrayCompras);
