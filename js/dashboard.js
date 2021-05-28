@@ -256,7 +256,7 @@ function cambiaSelect(){
 // Evaluamos el valor y lo pintamos.
 //************************************************/
 function cambiaValor(paramSelect){
-
+    
   let selectValor;
   let idValor;
   let idValorText;
