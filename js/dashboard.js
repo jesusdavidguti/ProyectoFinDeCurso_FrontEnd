@@ -105,7 +105,6 @@ function compraValor(){
       addDatosCompras(arrayColor, arrayLabelCompras, arrayCompras);
 
     },objetoUrl.getValoreshist(idValor,fechaHasta(0))); 
-
   }
 }
 
@@ -126,9 +125,6 @@ function evolucionBolsaInversion(paramValorHist, paramCantidad){
     // Añadimos esos datos al array de datos: 7 días.
     for (dato of resultDatos){
       
-      // console.log("dato:"+dato);
-      // console.log("paramCantidad:"+paramCantidad);
-
       if (arrayEvolucionCompras.length < 7){
           arrayEvolucionCompras.push(dato * paramCantidad);
       }
@@ -137,7 +133,6 @@ function evolucionBolsaInversion(paramValorHist, paramCantidad){
                                       (dato * paramCantidad)
       }
       index = index + 1;
-      //console.log("arrayEvolucionCompras[index]:"+arrayEvolucionCompras[index]);
     }
 
     // Pintamos en el chart de evolución de compras.
@@ -178,6 +173,7 @@ function addDatosCompras(paramColor, paramLabel, paramData){
 
 //************************************************/
 // Borramos e inicializamos el chart de compras
+// y el de seguimiento de compras
 //************************************************/
 function resetCompra(){
   document.getElementById("importe").value = "";
@@ -357,14 +353,9 @@ function pintaDatosMin(paramDatosMin){
 //************************************************/
 function addDatosEvolucionCompra(paramData, paramPeriodo, paramChart){
 
-  //console.log("paramPeriodo:"+paramPeriodo);
-  //console.log("paramData:"+paramData);
-  //console.log("paramChart:"+paramChart);
-
   // Cambiamos los pasos: eje y.
   paramChart.options.scales.yAxes.ticks.stepSize = 5;  
   paramChart.options.scales.yAxes.ticks.max = 100;
-  //paramChart.update();
 
   paramChart.data.labels=paramPeriodo;
 
