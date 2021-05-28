@@ -1,11 +1,12 @@
 // Globales
 var valoresChart;
 var compraValoresChart;
-
+var evolucionComprasChart;
 // Arrays
 var arrayCompras = new Array();
 var arrayLabelCompras = new Array();
 var arrayColor = new Array();
+var arrayEvolucionCompras = new Array();
 // Objetos
 var objetoUrl = new montaUrl();
 
@@ -25,7 +26,11 @@ var objetoUrl = new montaUrl();
   // Creamos Chart compra de valores
   // y lo propagamos.
   setChartCompraValores(creaChartDonut(document.getElementById('compraValoresChart')));
-  
+
+  // Creamos Chart seguimiento de compra de valores
+  // y lo propagamos.  
+  setChartSeguimientoCompras(creaChart(document.getElementById('evolucionCompraChart')));
+
   // Pintamos tres divisas en la semana en curso
   obtenerDatosChartDivisa(function(result){  
 
@@ -108,24 +113,35 @@ function compraValor(){
 // Añadimos el valor a la evolución de la bolsa.
 //************************************************/
 function evolucionBolsaInversion(paramValorHist, paramCantidad){
-  let arrayEvolucionCompras = new Array();
+  
   let index = 0;
+
+  // Reiniciamos y pintamos.
+  removeData(evolucionComprasChart);
+  setChartSeguimientoCompras(creaChart(document.getElementById('evolucionCompraChart')));
 
   // Recuperamos datos semanales del valor
   obtenerDatosHistChartValor(function(resultDatos,resultPeriodo){
 
-    // Añadimos esos datos al array de datos
+    // Añadimos esos datos al array de datos: 7 días.
     for (dato of resultDatos){
-      arrayEvolucionCompras
-      arrayEvolucionCompras.push(resultDatos.cotizacionUSdolar * paramCantidad)
+      
+      // console.log("dato:"+dato);
+      // console.log("paramCantidad:"+paramCantidad);
+
+      if (arrayEvolucionCompras.length < 7){
+          arrayEvolucionCompras.push(dato * paramCantidad);
+      }
+      else{
+          arrayEvolucionCompras[index]= (arrayEvolucionCompras[index]) +
+                                      (dato * paramCantidad)
+      }
+      index = index + 1;
+      //console.log("arrayEvolucionCompras[index]:"+arrayEvolucionCompras[index]);
     }
 
-
-
-
-
     // Pintamos en el chart de evolución de compras.
-  
+    addDatosEvolucionCompra(arrayEvolucionCompras, resultPeriodo, evolucionComprasChart);
 
   },objetoUrl.getValoreshistBetweenFecs(paramValorHist.valorHistID.valor.idVAlor,fechaHasta(3),fechaHasta(0)));
 
@@ -167,11 +183,14 @@ function resetCompra(){
   document.getElementById("importe").value = "";
   document.getElementById("cantidaValores").value = "";
   document.getElementById("selectValorCompra").selectedIndex = "0";
+  arrayEvolucionCompras = [];
   arrayCompras = [];
   arrayLabelCompras = [];
   arrayColor = [];
   removeData(compraValoresChart);
   setChartCompraValores(creaChartDonut(document.getElementById('compraValoresChart')));
+  removeData(evolucionComprasChart);
+  setChartSeguimientoCompras(creaChart(document.getElementById('evolucionCompraChart')));
 }
 
 //************************************************/
@@ -332,6 +351,36 @@ function pintaDatosMin(paramDatosMin){
     document.getElementById("tablaValores").rows[i+1].cells[6].innerText = JSON.stringify(paramDatosMin[i].diferenciaCotizacion);
   }
 }
+
+//************************************************/
+// Añadimos y actualizamos datos al chart evolución
+//************************************************/
+function addDatosEvolucionCompra(paramData, paramPeriodo, paramChart){
+
+  //console.log("paramPeriodo:"+paramPeriodo);
+  //console.log("paramData:"+paramData);
+  //console.log("paramChart:"+paramChart);
+
+  // Cambiamos los pasos: eje y.
+  paramChart.options.scales.yAxes.ticks.stepSize = 5;  
+  paramChart.options.scales.yAxes.ticks.max = 100;
+  //paramChart.update();
+
+  paramChart.data.labels=paramPeriodo;
+
+  paramChart.data.datasets.push({      
+      label: "Evolución compras",
+      lineTension: 0,
+      backgroundColor: 'transparent',
+      borderColor: '#000000',
+      borderWidth: 4,
+      pointBackgroundColor: '#007bff',
+      data: paramData
+    });
+
+    paramChart.update();
+}
+
 
 //************************************************/
 // Añadimos y actualizamos datos al chart valores
@@ -690,9 +739,17 @@ function setChartValores(paramValoresChart){
 }
 
 //************************************************/
-// Hacemos que el chart de valores sea global
+// Hacemos que el chart de compras sea global
 //************************************************/
 function setChartCompraValores(paramCompraValoresChart){
 
   compraValoresChart = paramCompraValoresChart;
+}
+
+//************************************************/
+// Hacemos que el chart de seguimiento sea global
+//************************************************/
+function setChartSeguimientoCompras(paramSeguimiengtoCompraChart){
+
+  evolucionComprasChart = paramSeguimiengtoCompraChart;
 }
