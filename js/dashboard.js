@@ -81,12 +81,16 @@ function compraValor(){
       
       importe = cantidad * jsonValor.cotizacionUSdolar
 
-      // Ya se ha añadido
+      // Pintamos la evolución de la bolsa.
+      evolucionBolsaInversion(jsonValor, cantidad);
+
+      // Ya se había añadido
       if (arrayLabelCompras.indexOf(jsonValor.valorHistID.valor.nombre) != -1){
           pos = arrayLabelCompras.indexOf(jsonValor.valorHistID.valor.nombre);
           importe = importe + arrayCompras[pos];
           arrayCompras.splice(pos,1,importe);
       }
+      // Es un valor nuevo
       else{
           arrayCompras.push(importe); 
           arrayLabelCompras.push(jsonValor.valorHistID.valor.nombre);
@@ -98,6 +102,33 @@ function compraValor(){
     },objetoUrl.getValoreshist(idValor,fechaHasta(0))); 
 
   }
+}
+
+//************************************************/
+// Añadimos el valor a la evolución de la bolsa.
+//************************************************/
+function evolucionBolsaInversion(paramValorHist, paramCantidad){
+  let arrayEvolucionCompras = new Array();
+  let index = 0;
+
+  // Recuperamos datos semanales del valor
+  obtenerDatosHistChartValor(function(resultDatos,resultPeriodo){
+
+    // Añadimos esos datos al array de datos
+    for (dato of resultDatos){
+      arrayEvolucionCompras
+      arrayEvolucionCompras.push(resultDatos.cotizacionUSdolar * paramCantidad)
+    }
+
+
+
+
+
+    // Pintamos en el chart de evolución de compras.
+  
+
+  },objetoUrl.getValoreshistBetweenFecs(paramValorHist.valorHistID.valor.idVAlor,fechaHasta(3),fechaHasta(0)));
+
 }
 
 //************************************************/
@@ -596,9 +627,9 @@ function fechaddMMyyyy(paramDate){
   return (dia + mes + ann);
 }
 
-//************************************************/
+//**************************************************/
 // Fechas de una semana hacia atrás partiendo de hoy
-//************************************************/
+//**************************************************/
 function fechasSemanaAtras(){
 
   let dateHoy = new Date();

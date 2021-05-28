@@ -71,10 +71,15 @@
               <span data-feather="shopping-cart"></span>
               Compra valores
             </a>
-          </li>          
+          </li>           
+          <li class="nav-item">
+            <a class="nav-link" href="#evolucionCompraValores">
+              <span data-feather="shopping-cart"></span>
+              Evolución compra valores
+            </a>
+          </li>           
         </ul>
         
-
       </div>
     </nav>
 
@@ -85,7 +90,11 @@
         </div>
       </div>
 
+      <!-- Evolución de divisas. -->      
+
       <canvas class="my-4 w-100" id="divisasChart" width="900" height="380"></canvas>
+
+      <!-- Resumen de mejores y peores cotizaciones del día. -->      
 
       <h2 id= "tablaResumen">Resumen valores</h2>
       <table id= "tablaValores" class="table table-striped">
@@ -149,6 +158,8 @@
         </tbody>
       </table>
       
+      <!-- Comparativa de dos valores mediante gráfica. -->
+
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 id="valores" class="h2">Evolución de valores</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
@@ -176,6 +187,8 @@
 
       <canvas class="my-4 w-100" id="valoresChart" width="900" height="380"></canvas>
 
+      <!-- Compra de valores y "donut" con la bolsa. -->      
+
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 id="compraValores" class="h2">Compra de valores</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
@@ -199,6 +212,14 @@
       </div>
 
       <canvas class="my-4 w-100" id="compraValoresChart" width="900" height="380"></canvas>
+
+      <!-- Historial de la compra de valores. -->
+
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 id="evolucionCompraValores" class="h2">Evolución compra de valores</h1>
+      </div>
+
+      <canvas class="my-4 w-100" id="evolucionCompraChart" width="900" height="380"></canvas>
 
     </main>
   </div>
